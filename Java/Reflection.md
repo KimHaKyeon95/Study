@@ -1,6 +1,7 @@
 2022.01.06
 Spring에 대해 공부하던 중 강의에서 독특한 부분이 나왔다.
 ```java
+	@GetMapping("productadd")
 	public ModelAndView add(String prodNo, String prodName, int prodPrice) {
 		logger.warn(prodNo + ":" + prodName + ":" + prodPrice);
 		Product p = new Product(prodNo, prodName, prodPrice);

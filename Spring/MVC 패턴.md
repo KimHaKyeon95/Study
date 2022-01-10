@@ -17,6 +17,9 @@ Spring에서는 이런 MVC패턴을 구현하기 위한 모듈을 제공해준�
 동작 순서는 다음과 같다.
 1. Client로 부터 요청이 들어오면 DisapatcherServlet이 호출.
 2. DispatcherServlet은 HandlerMapping으로 요청을 던짐. URL을 분석하여 적합한 Controller를 선택해 반환.
-3. Controller는 비즈니스 로직을 처리하고 해당 결과를 Model에 저장하고 View Name을 DispatcherServlet에 반환.
+3. Controller는 비즈니스 로직을 처리하고 해당 결과를 Model에 저장함. 기존의 Servlet에서는 HttpServletRequest를 
+사용하여 정보를 전달하고 이런 Request를 View에서도 사용했지만 Spring에서는 Model을 사용함. 이렇게 함으로써 응답할 데이터 Model과 응답할 레이아웃View를 완벽히 구분할 수 있다. View Name을 DispatcherServlet에 반환. 
+Controller는 ViewName을 String으로 반환하는데 스프링 컨테이너가 이런 String값을 알아서 ModelAndView타입으로 만들어 
+DispatcherServlet에서 반환함.
 4. DispatcherServlet은 ViewResolver를 호출하고 반환된 ViewName에 해당하는 View를 찾고 결과를 넘겨 보여주도록함.
 5. View는 Model객체에서 화면 표시에 필요한 객체를 찾고 화면에 표시해줌.

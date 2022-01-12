@@ -1,11 +1,12 @@
 2022/01/11
 
 ## Connection Pool
-Connection을 생성하는 것은 자원을 많이 먹는 작업이다. 이전에는 매번 getConnection()을 통해 Connection객체를 생성하여 작업을 
-했는데 이러한 Connection을 줄이기 위해 JOIN도 해보고 많은 추가적인 작업을 수행했다.  
+Connection을 생성하는 것은 자원을 많이 먹는 작업이다. 이전에는 JDBC 드라이버를 로드하고 getConnection()을 통해 Connection객체를 생성하여 작업을 했는데 이러한 Connection을 줄이기 위해 JOIN도 해보고 많은 추가적인 작업을 수행했다.  
 자원낭비를 막기 위해 미리 Connection Pool에서 Connection을 생성할 수 있다. 작동원리는 웹 컨테이너가 실행되면 DB와 미리 
 연결을 해둔 객체를 Pool에 저장하고 요청이 들어오면 연결(connection)을 빌려주고 처리가 끝나면 Pool에 저장을 한다. 이 때 
 DataSource라는 인터페이스를 통해 Connection Pool을 구현하기 위한 스펙을 정한다.
+이렇듯, JDBC드라이버를 로드해 getConnection()을 통해 매번 Connection객체를 생성하는 것보다 DBCP를 사용해 Connection Pool에 먼저 Connection을 생성해두고 Connection을 제공하는 것이 성능상 훨씬 뛰어나다.
+
 
 ## DataSource
 DataSource는 Connection Pool을 구현하기 위한 스펙을 정의하는 인터페이스이다. 나는 DataSource를 사용해 Spring에서 DB와의 연결을 

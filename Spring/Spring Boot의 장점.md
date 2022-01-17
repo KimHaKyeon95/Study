@@ -1,5 +1,7 @@
 2022/01/18
 
+# Spring Boot의 장점
+
 ## AutoConfiguration
 스프링 레거시에 비해서 간단한 점을 생각했을 때 가장 먼저 떠오른 부분이다. 스프링 레거시에서는 매번 Bean을 등록해줘야했다. 
 @Controller, @Service, @Repository, @Configuration 같은 설정들을 

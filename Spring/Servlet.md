@@ -32,7 +32,9 @@ init()이라는 메서드는 서블릿을 초기화 하기 위해서 ServletConf
 태그 내부의 숫자는 우선 순위를 뜻하며 0에 가까울 수록 먼저 실행된다.  
 위의 상황은 해당 서블릿 객체가 생성되어 있지 않은 상태였고 이미 해당 과정을 거쳐 생성된 서블릿 객체가 있으면 service()메서드를 호출하게 된다. service()메서드는 doPost()와 doGet()로 클라이언가 요청한 메서드방식에 따라 선택할 수 있다. 이렇게 service()메서드가 호출되기 전에 HttpServletRequest와 HttpServletResponse객체가 생성된다.  
   위에서 정의한 FirstServlet은 HttpServlet을 상속받았다. init()메서드가 실행되면 HttpServlet의 필드인 sc는 ServletContext객체를 가리키게 될 것이다. 위에서 만들어진 두 객체인 HttpServletRequest와 HttpServletResponse객체는 doGet()과 doPost()의 파라미터로 들어가게 된다. doGet()과 doPost()메서드가 실행되고 응답이 오면 두 객체는 소멸된다.  
- 그리고 destroy()메서드를 통해 서블릿 객체를 제거한다.
+ 그리고 destroy()메서드를 통해 서블릿 객체를 제거한다.  
+  
+  
 그렇다면 Servlet과 Spring의 관계는 어떻게 되는 것일까?
 
 ## Servlet과 Spring

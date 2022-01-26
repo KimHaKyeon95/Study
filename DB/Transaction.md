@@ -29,9 +29,13 @@ Transaction이란 간단하게 말해서 데이터베이스의 상태를 변화�
 
 위와 같은 특징의 ACID라고 한다.
 
+## Spring에서의 Transaction
+Spring은 트랜잭션 추상화를 지원하고 있다. 트랜잭션 추상화는 트랜잭션의 공통점을 담은 기술이다. 이를 이용해 각 기술(JDBC, JPA, Hibernate)에 종속적인 코드를 작성하지 않아도 일관적으로 트랜잭션을 처리할 수 있다. JDBC와 JPA에서 로컬 트랜잭션(같은 리소스 내에서 일어나는 독립적인 일들을 묶은 것)을 이용하면 DataSourceTxManager인터페이스를 사용하고 Hibernate에서 로컬 트랜잭션을 사용하면 HibernateTxManager를 사용하면 된다. 만약 기술에 상관없이 트랜잭션을 구현하고 싶다면 PlatformTransactionManager를 사용하면 된다.  
+  
+하지만 코드를 작성해서 트랜잭션을 구현하게 되면 기존의 비즈니스 로직 코드와 얽히면서 코드가 복잡해질 수 있다. 이렇게 한 코드에 여러가지 로직에 관한 코드가 섞이면 책임이 많아 진다고 하는데 이는 그리 좋은 현상은 아니다. 비즈니스 로직 코드에서 트랜잭션 코드를 빼내기 위해 AOP를 고안하였고 이를 구현하기 위해 @Transactional이라는 어노테이션을 고안했다.
 
 ## Spring에서의 @Transactional
-우선 Spring에서는 Connection객체를 공유해 하나의 트랜잭션으로 모든 작업을 관리할 때 발생하는 불필요한 작업을 방지하기 위해 Transaction Synchronization(트랜잭션 동기화)를 제공한다. Connection객체를 저장소에 저장하고 필요할 때 꺼내서 쓸 수 있도록 한 것이다.
+Spring에서는 Connection객체를 공유해 하나의 트랜잭션으로 모든 작업을 관리할 때 발생하는 불필요한 작업을 방지하기 위해 Transaction Synchronization(트랜잭션 동기화)를 제공한다. Connection객체를 저장소에 저장하고 필요할 때 꺼내서 쓸 수 있도록 한 것이다.
 JPA에서는 쿼리를 작성하지 않고 여러가지 Transaction에 관한 처리가 가능하다. @Transactional을 이용하여 이를 가능케 한다. 
 이렇게 어노테이션을 붙여 외부에서 트랜잭션의 기능을 부여하는 것을 선언적 트랜잭션이라고 한다. 어노테이션이 붙게 되면 해당 메서드는 트랜잭션의 관리 대상이 된다. @Transactional을 통해 포인트컷에 등록하고 트랜잭션 속성을 부여하는 것이다.
 
